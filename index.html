@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    
+    <!--TODO: Change Title-->
+    <title>Your front-end</title>
+    
+    <style>
+        table, th, td {
+        border:1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <!--TODO: Add system name--> Classifo
+    <!--TODO: Add system logo-->
+    
+    <div>
+        Enter your text to be classified<br>
+        <textarea type="text" id="statement"></textarea>
+        <input type="button" id="submit" value="Submit">
+        <input type="button" id="clear" value="Clear">
+    </div>
+    
+    <hr>
+    
+    <div>
+        <table>
+        </table>
+    </div>
+
+    <script>
+        document.querySelector("#submit").addEventListener("click", async function () {
+            let textToBeClassified = document.querySelector("#statement").value;
+
+            let response = await fetch(`http://localhost:8000/fasttext?statement=${textToBeClassified}`);
+            let classifications = await response.json();
+            
+            let text = "";
+            classifications.forEach(c => text += c.label + ", ");
+            
+            document.querySelector("table").innerHTML = document.querySelector("table").innerHTML + `<tr><td>${textToBeClassified}</td><td>${text}</td></tr>`;
+
+        });
+
+        document.querySelector("#clear").addEventListener("click", function () {
+            document.querySelector("#statement").value = "";
+        });
+    </script>
+
+</body>
+
+</html>
