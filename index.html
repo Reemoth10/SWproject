@@ -1,55 +1,58 @@
+
+
+<!-- This is the new UI that have been designed for this project. Where multiple changes took place such
+as:
+1- Color of the header.
+2- Width of the header.
+3- Hight of the header.
+4- Added a logo (image).
+5- Added a title.
+6- A new and updated Textbox.
+7- A new and updated Output box.
+8- A new color to the submit and clear buttons.
+9- Adjusments to some measurements in general. -->
+
+
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    
-    <!--TODO: Change Title-->
-    <title>Your front-end</title>
-    
-    <style>
-        table, th, td {
-        border:1px solid black;
-        }
-    </style>
-</head>
+  <head>
+    <meta charset="UTF-8" /> 
+    <title>Food-Expected tool</title>
+    <!-- <link rel="stylesheet" href="Style.css"  /> -->
+	<link rel="stylesheet" type="text/css" href="css/Style.css" />
 
-<body>
-    <!--TODO: Add system name--> Classifo
-    <!--TODO: Add system logo-->
-    
-    <div>
-        Enter your text to be classified<br>
-        <textarea type="text" id="statement"></textarea>
-        <input type="button" id="submit" value="Submit">
-        <input type="button" id="clear" value="Clear">
+
+  </head>
+
+  <body>
+    <div class="header">
+      <div>
+        <img class="logo1" src="images/health3.png" alt="CS image">
+      </div>
+      <div class="website_name">
+        <h1>Food-Expected</h1>
+      </div>
     </div>
-    
-    <hr>
-    
-    <div>
-        <table>
-        </table>
-    </div>
+    <form action="/fasttext">
+      <div class="center">
+        <label for="name">Enter your food to be classified </label><br>
+        <input
+          class="Textbox"
+          type="text"
+          id="name"
+          name="statement"
+          placeholder="Enter your food here"
+        />
+      </div>
+      <div class="wrap">
+        <div class="item">
+          <button class="btn">Submit</button>
+        </div>
+        <div class="item">
+          <button input type="reset" class="btn2">Clear text</button>
+        </div>
+      </div>
+    </form>
 
-    <script>
-        document.querySelector("#submit").addEventListener("click", async function () {
-            let textToBeClassified = document.querySelector("#statement").value;
-
-            let response = await fetch(`http://localhost:8000/fasttext?statement=${textToBeClassified}`);
-            let classifications = await response.json();
-            
-            let text = "";
-            classifications.forEach(c => text += c.label + ", ");
-            
-            document.querySelector("table").innerHTML = document.querySelector("table").innerHTML + `<tr><td>${textToBeClassified}</td><td>${text}</td></tr>`;
-
-        });
-
-        document.querySelector("#clear").addEventListener("click", function () {
-            document.querySelector("#statement").value = "";
-        });
-    </script>
-
-</body>
-
+  </body>
 </html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Food Prediction</title>
+    <link rel="stylesheet" type="text/css" href="css/Style.css" />
+  </head>
+
+  <body>
+    <div class="header">
+      <div>
+        <img class="logo1" src="images/health3.png" alt="CS image" />
+      </div>
+      <div class="website_name">
+        <h1>Food Prediction</h1>
+      </div>
+    </div>
+    <form action="/fasttext">
+      <div class="center">
+        <label for="name">Enter your text to be classified </label><br />
+        <input
+          class="Textbox"
+          type="text"
+          id="name"
+          name="statement"
+          placeholder="Enter your food"
+        />
+      </div>
+      <div class="wrap">
+        <div class="item">
+          <button class="btn">Submit</button>
+        </div>
+        <div class="item">
+          <button input type="reset" class="btn2">Clear</button>
+        </div>
+      </div>
+    </form>
+
+    <div class="outputarea">
+        <div class="tabel">
+            <div class="A"><h3 >input </h3></div>
+            <div class="B"><h3 >output </h3></div>
+        </div>
+      <% if (result.length > 0) {%> <% result.forEach(finall => { %>
+      <div class="results">
+        <div class="text"><%= finall.value %></div>
+        <div class="value"><%= finall.label %></div>
+      </div>
+      <%}) %> <% } else { %>
+      <p>no result yet.</p>
+      <% } %>
+    </div>
+  </body>
+</html>
